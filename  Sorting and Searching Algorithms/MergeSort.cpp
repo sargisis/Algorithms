@@ -1,4 +1,8 @@
 #include <iostream>
+#include <chrono>
+
+
+// * @param Merge sort algorithm // 
 
 void merge_sort_algorithm(int* arr, int start, int mid, int end) {
     int nleft = mid - start + 1;
@@ -42,6 +46,8 @@ void merge_sort_algorithm(int* arr, int start, int mid, int end) {
 
 }
 
+// * @param merge array // 
+
 void merge_sort(int* arr, int p, int r) {
     if (p < r) {
         int mid = p + (r - p) / 2;
@@ -51,24 +57,24 @@ void merge_sort(int* arr, int p, int r) {
     }
 }
 
+void print(int* arr , int size) {
+    for (size_t i = 0; i < size; ++i) {
+        std::cout << arr[i] << " ";
+    }
+}
+
 int main() {
     int arr[] = {1,000,0,2,3,4,57,42,45,66,3,23,1,1,1,2,3,45,7,8};
     int arr_size = sizeof(arr) / sizeof(arr[0]);
 
-    std::cout << "Sorting before " << std::endl; 
-    for (int i = 0; i < arr_size; i++) {
-        std::cout << arr[i] << " ";
-    }
-    std::cout << std::endl;
-
+    auto start = std::chrono::high_resolution_clock::now();
     merge_sort(arr, 0, arr_size - 1);
-    
-    std::cout << "Sorting array with merge_sort" << std::endl; 
-    for (int i = 0; i < arr_size; i++) {
-        std::cout << arr[i] << " ";
-    }
-    std::cout << std::endl;
+    auto end = std::chrono::high_resolution_clock::now();
 
- 
+    std::chrono::duration<double> elapsed = end - start;
+    print(arr, arr_size);
+
+    std::cout << "Merge sort taken " << elapsed.count() << "miliseconds" << std::endl; 
+
     return 0;
 }

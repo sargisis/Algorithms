@@ -1,7 +1,9 @@
 #include <iostream>
+#include <chrono>
 
+// * @param Selection sort algorithm // 
 
-int selection_sort_algorithm(int* arr, int size) {
+void selection_sort_algorithm(int* arr, int size) {
     for (size_t i = 0; i < size - 1; ++i) {
         int ind = i; 
         for (size_t j = i + 1; j < size; ++j) {
@@ -10,25 +12,28 @@ int selection_sort_algorithm(int* arr, int size) {
             }
         }
         std::swap(arr[i] , arr[ind]);
-    }
-    return -1; 
+    }  
 }
+
+void print(int* arr , int size) {
+    for (size_t i = 0; i < size; ++i) {
+        std::cout << arr[i] << " ";
+    }
+}
+
 
 int main() {
     int arr[] = {99 , 3, 2 ,1 , 7 , 5, 3};
     int size = sizeof(arr) / sizeof(arr[0]);
-    std::cout << "Before sorting " << std::endl; 
-    for (size_t i = 0; i < size; ++i) {
-        std::cout << arr[i] << " ";
-    }
-    std::cout << std::endl; 
-    int result = selection_sort_algorithm(arr,size);
     
-    std::cout << "Sorting with help selection sort " << std::endl; 
-    for (size_t i = 0; i < size; ++i) {
-        std::cout << arr[i] << " ";
-    }
-    std::cout << std::endl; 
+    auto start = std::chrono::high_resolution_clock::now();
+    selection_sort_algorithm(arr,size);
+    auto end = std::chrono::high_resolution_clock::now();
+
+    std::chrono::duration<double> elapsed = end - start;
+    print(arr,size);
+    std::cout << "Selection sort taken" << elapsed.count() << "miliseconds" << std::endl; 
+    
 
     return 0;
 }

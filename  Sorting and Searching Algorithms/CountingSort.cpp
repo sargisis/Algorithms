@@ -1,10 +1,12 @@
 #include <iostream>
 #include <vector>
-#include <numeric>
+#include <chrono>
+
+
+// * @param counting sort algorithm // 
 
 std::vector<int> counting_sort_algorithm(std::vector<int>& arr) {
     int N = arr.size(); 
-
 
     int MaxNumber = 0; 
     
@@ -32,14 +34,24 @@ std::vector<int> counting_sort_algorithm(std::vector<int>& arr) {
     return output_array;
 }
 
+void print(std::vector<int>& arr) 
+{
+    for (size_t i = 0; i < arr.size(); ++i) 
+    {
+        std::cout << arr[i] << " ";
+    }
+}
+
 int main() {
    
-   std::vector<int> input_array = {2,5,3,0,2,3,0,3};
+   std::vector<int> arr = {2,5,3,0,2,3,0,3};
 
-   std::vector<int> output_array = counting_sort_algorithm(input_array);
-   for (size_t i = 0; i < input_array.size(); ++i) {
-        std::cout << output_array[i] << " ";
-   }
-   std::cout << std::endl; 
+   auto start = std::chrono::high_resolution_clock::now();
+   std::vector<int> output_array = counting_sort_algorithm(arr);
+   auto end = std::chrono::high_resolution_clock::now();
 
+   std::chrono::duration<double> elapsed = end - start;
+
+   print(arr);
+   std::cout << "Counting sort taken " << elapsed.count() << "miliseconds" << std::endl;
 }

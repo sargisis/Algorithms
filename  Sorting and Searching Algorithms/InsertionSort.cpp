@@ -1,6 +1,10 @@
 #include <iostream>
+#include <chrono>
 
-int insertion_sort_algorithm(int* arr, int size) {
+
+// * @param Insertion sort algorithm //
+
+void insertion_sort_algorithm(int* arr, int size) {
     for (size_t i = 1; i < size; ++i) {
         int result = arr[i];
         int j = i - 1; 
@@ -11,21 +15,25 @@ int insertion_sort_algorithm(int* arr, int size) {
         
         arr[j + 1] = result; 
     }
-    return -1;
+}
+
+void print(int* arr , int size) {
+    for (size_t i = 0; i < size; ++i) {
+        std::cout << arr[i] << " ";
+    }
 }
 
 int main() {
     int arr[] = {99,33,1,5,99,33,44}; 
     int size = sizeof(arr) / sizeof(arr[0]);
-    std::cout << "Before sorting " << std::endl; 
-    for (size_t i = 0; i < size; ++i ) {
-        std::cout << arr[i] << " ";
-    }
-    std::cout << std::endl; 
-    int result = insertion_sort_algorithm(arr,size);
-    std::cout << "Sorting with help insertion sort " << std::endl;
-    for (size_t i = 0; i < size; ++i) {
-        std::cout << arr[i] << " ";
-    }
+   
+    auto start = std::chrono::high_resolution_clock::now(); 
+    insertion_sort_algorithm(arr,size);
+    auto end = std::chrono::high_resolution_clock::now();
+    
+    std::chrono::duration<double> elapsed = end - start;
+    print(arr, size);
+
+    std::cout << "Insertion sort taken " << elapsed.count() << "miliseconds" << std::endl; 
 }
 
