@@ -2,10 +2,10 @@
 #include <vector>
 #include <chrono>
 
-
+using std::vector;
 // * @param counting sort algorithm // 
 
-std::vector<int> counting_sort_algorithm(std::vector<int>& arr) {
+vector<int> counting_sort_algorithm(vector<int>& arr) {
     int N = arr.size(); 
 
     int MaxNumber = 0; 
@@ -14,7 +14,7 @@ std::vector<int> counting_sort_algorithm(std::vector<int>& arr) {
         MaxNumber = std::max(MaxNumber, arr[i]);
     }
 
-   std::vector<int> count_array(MaxNumber + 1 , 0);
+   vector<int> count_array(MaxNumber + 1 , 0);
    
    for (int i = 0; i < N; ++i) {
         count_array[arr[i]]++;
@@ -24,7 +24,7 @@ std::vector<int> counting_sort_algorithm(std::vector<int>& arr) {
         count_array[i] += count_array[i - 1];
     }
 
-    std::vector<int> output_array(N);
+    vector<int> output_array(N);
 
     for (int i = N - 1; i >= 0; --i) {
       output_array[count_array[arr[i]] - 1] = arr[i];
@@ -34,7 +34,7 @@ std::vector<int> counting_sort_algorithm(std::vector<int>& arr) {
     return output_array;
 }
 
-void print(std::vector<int>& arr) 
+void print(vector<int>& arr) 
 {
     for (size_t i = 0; i < arr.size(); ++i) 
     {
@@ -44,10 +44,10 @@ void print(std::vector<int>& arr)
 
 int main() {
    
-   std::vector<int> arr = {2,5,3,0,2,3,0,3};
+   vector<int> arr = {2,5,3,0,2,3,0,3};
 
    auto start = std::chrono::high_resolution_clock::now();
-   std::vector<int> output_array = counting_sort_algorithm(arr);
+   vector<int> output_array = counting_sort_algorithm(arr);
    auto end = std::chrono::high_resolution_clock::now();
 
    std::chrono::duration<double> elapsed = end - start;

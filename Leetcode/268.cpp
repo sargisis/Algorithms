@@ -6,8 +6,6 @@
 #include <vector>
 #include <algorithm>
 
-
-
 class Solution {
 public:
     int missingNumber(std::vector<int>& nums) {

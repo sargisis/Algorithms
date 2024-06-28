@@ -7,6 +7,7 @@
 #include <limits>
 #include <exception>
 
+
 namespace g3 {
 
 template <typename T, typename Allocator = std::allocator<T>>
@@ -29,6 +30,7 @@ public:
 
 public:
     forward_list();
+    
     
     forward_list(const forward_list& rhv);
     
@@ -113,23 +115,6 @@ public:
 public:
     void swap(forward_list& other) noexcept;
 
-public:
-    void reverse() noexcept;
-
-public:
-    void print() const;
-
-public:
-    bool operator==(const forward_list& other) const; 
-    bool operator!=(const forward_list& other) const; 
-    bool operator<(const forward_list& other) const; 
-    bool operator<=(const forward_list& other) const; 
-    bool operator>(const forward_list& other) const; 
-    bool operator>=(const forward_list& other) const; 
-
-private:
-    int compare(const forward_list& other) const;
-
 private:
     struct Node {
         value_type val;
@@ -148,9 +133,7 @@ class forward_list<T,Allocator>::const_iterator
 protected:
     Node* ptr;  
 private:
-    const_iterator(Node* ptr) : ptr(ptr) {}
-protected:
-    int compare(const const_iterator& other) const; 
+    const_iterator(Node* ptr);
 public:
     const_iterator() : ptr(nullptr) {}
     const_iterator(const const_iterator& rhv) = default;
@@ -174,9 +157,9 @@ class forward_list<T,Allocator>::iterator : public forward_list<T,Allocator>::co
 {
     friend class forward_list<value_type>;
 private:
-    iterator(Node* ptr) : forward_list<T, Allocator>::const_iterator(ptr) {}
+    iterator(Node* ptr);
 public:
-    iterator() : forward_list<T, Allocator>::const_iterator() {}
+    iterator() = default;
     iterator(const iterator& rhv) = default;
     iterator(iterator&& rhv) = default;
 

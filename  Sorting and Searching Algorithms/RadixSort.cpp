@@ -15,7 +15,7 @@ int get_max(vector<int>& arr)
             max = arr[i];
         }
     }
-    return max;  
+    return max;   
 }
 
 // * @param counting sort algorithm special for radix sort // 

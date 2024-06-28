@@ -1,16 +1,19 @@
 #include <iostream>
 #include <chrono>
+#include <vector>
+
+using std::vector; 
 
 
 // * @param Merge sort algorithm // 
 
-void merge_sort_algorithm(int* arr, int start, int mid, int end) {
+void merge_sort_algorithm(vector<int>& arr, int start, int mid, int end) {
     int nleft = mid - start + 1;
     int nright = end - mid;
 
 
-    int* left = new int[nleft];
-    int* right = new int[nright];
+    vector<int> left(nleft);
+    vector<int> right(nright);
 
     for (int i = 0; i < nleft; ++i) {
         left[i] = arr[start + i];
@@ -40,15 +43,11 @@ void merge_sort_algorithm(int* arr, int start, int mid, int end) {
         j = j + 1;
         k = k + 1;
     }
-
-    delete[] left;
-    delete[] right;
-
 }
 
 // * @param merge array // 
 
-void merge_sort(int* arr, int p, int r) {
+void merge_sort(vector<int>& arr, int p, int r) {
     if (p < r) {
         int mid = p + (r - p) / 2;
         merge_sort(arr, p, mid);
@@ -57,22 +56,21 @@ void merge_sort(int* arr, int p, int r) {
     }
 }
 
-void print(int* arr , int size) {
-    for (size_t i = 0; i < size; ++i) {
+void print(vector<int>& arr) {
+    for (size_t i = 0; i < arr.size(); ++i) {
         std::cout << arr[i] << " ";
     }
 }
 
 int main() {
-    int arr[] = {1,000,0,2,3,4,57,42,45,66,3,23,1,1,1,2,3,45,7,8};
-    int arr_size = sizeof(arr) / sizeof(arr[0]);
+    vector<int> arr = {1,000,0,2,3,4,57,42,45,66,3,23,1,1,1,2,3,45,7,8};
 
     auto start = std::chrono::high_resolution_clock::now();
-    merge_sort(arr, 0, arr_size - 1);
+    merge_sort(arr, 0, arr.size() - 1);
     auto end = std::chrono::high_resolution_clock::now();
 
     std::chrono::duration<double> elapsed = end - start;
-    print(arr, arr_size);
+    print(arr);
 
     std::cout << "Merge sort taken " << elapsed.count() << "miliseconds" << std::endl; 
 
