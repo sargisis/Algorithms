@@ -115,7 +115,7 @@ g3::forward_list<T, Allocator>& g3::forward_list<T, Allocator>::operator=(forwar
 }
 
 template<typename T, typename Allocator>
-g3::forward_list<T,Allocator>::allocator_type g3::forward_list<T,Allocator>::get_allocator() const
+typename g3::forward_list<T,Allocator>::allocator_type g3::forward_list<T,Allocator>::get_allocator() const
 {
     return this->m_alloc;
 }
@@ -149,13 +149,13 @@ void g3::forward_list<T,Allocator>::assign(std::initializer_list<value_type> ili
 }
 
 template<typename T, typename Allocator>
-g3::forward_list<T,Allocator>::reference g3::forward_list<T,Allocator>::front()
+typename g3::forward_list<T,Allocator>::reference g3::forward_list<T,Allocator>::front()
 {
     return this->m_head->val;
 }
 
 template<typename T, typename Allocator>
-g3::forward_list<T,Allocator>::const_reference g3::forward_list<T,Allocator>::front() const
+typename g3::forward_list<T,Allocator>::const_reference g3::forward_list<T,Allocator>::front() const
 {
     return this->m_head->val;
 }
@@ -167,7 +167,7 @@ bool g3::forward_list<T,Allocator>::empty() const noexcept
 }
 
 template<typename T, typename Allocator>
-g3::forward_list<T,Allocator>::size_type g3::forward_list<T,Allocator>::max_size() const noexcept
+typename g3::forward_list<T,Allocator>::size_type g3::forward_list<T,Allocator>::max_size() const noexcept
 {
     std::numeric_limits<size_t>::max() / sizeof(Node);
 }
@@ -360,7 +360,7 @@ void g3::forward_list<T, Allocator>::swap(forward_list& other) noexcept {
 }
 
 template<typename T, typename Allocator>
-g3::forward_list<T,Allocator>::iterator g3::forward_list<T,Allocator>::insert_after(const_iterator pos , const_reference value) {
+typename g3::forward_list<T,Allocator>::iterator g3::forward_list<T,Allocator>::insert_after(const_iterator pos , const_reference value) {
     if (this->m_head == nullptr && pos.ptr == nullptr)
     {
         this->m_head = new Node(value);
@@ -379,7 +379,7 @@ g3::forward_list<T,Allocator>::iterator g3::forward_list<T,Allocator>::insert_af
 }
 
 template<typename T, typename Allocator>
-g3::forward_list<T,Allocator>::iterator g3::forward_list<T,Allocator>::insert_after(const_iterator pos, rvalue_reference value)
+typename g3::forward_list<T,Allocator>::iterator g3::forward_list<T,Allocator>::insert_after(const_iterator pos, rvalue_reference value)
 {
     if (this->m_head == nullptr && pos.ptr == nullptr)
     {
@@ -399,7 +399,7 @@ g3::forward_list<T,Allocator>::iterator g3::forward_list<T,Allocator>::insert_af
 }
 
 template<typename T, typename Allocator>
-g3::forward_list<T,Allocator>::iterator g3::forward_list<T,Allocator>::insert_after(const_iterator pos , size_type count , const_reference value)
+typename g3::forward_list<T,Allocator>::iterator g3::forward_list<T,Allocator>::insert_after(const_iterator pos , size_type count , const_reference value)
 {
     if (this->m_head == nullptr && pos.ptr == nullptr)
     {
@@ -429,7 +429,7 @@ g3::forward_list<T,Allocator>::iterator g3::forward_list<T,Allocator>::insert_af
 
 template<typename T, typename Allocator>
 template<typename InputIt>
-g3::forward_list<T,Allocator>::iterator g3::forward_list<T,Allocator>::insert_after(const_iterator pos , InputIt first , InputIt last)
+typename g3::forward_list<T,Allocator>::iterator g3::forward_list<T,Allocator>::insert_after(const_iterator pos , InputIt first , InputIt last)
 {
     Node* current = pos.ptr;
     while (first != last)
@@ -447,7 +447,7 @@ g3::forward_list<T,Allocator>::iterator g3::forward_list<T,Allocator>::insert_af
 }
 
 template<typename T, typename Allocator>
-g3::forward_list<T,Allocator>::iterator g3::forward_list<T,Allocator>::insert_after(const_iterator pos , std::initializer_list<T> ilist)
+typename g3::forward_list<T,Allocator>::iterator g3::forward_list<T,Allocator>::insert_after(const_iterator pos , std::initializer_list<T> ilist)
 {
     Node* current = pos.ptr;
     for (auto it = ilist.begin(); it != ilist.end(); ++it) {
@@ -464,7 +464,7 @@ g3::forward_list<T,Allocator>::iterator g3::forward_list<T,Allocator>::insert_af
 }
 
 template<typename T, typename Allocator>
-g3::forward_list<T,Allocator>::iterator g3::forward_list<T,Allocator>::erase_after(const_iterator pos)
+typename g3::forward_list<T,Allocator>::iterator g3::forward_list<T,Allocator>::erase_after(const_iterator pos)
 {
     Node* current = pos.ptr;
     while (current != nullptr && current->next != nullptr)
@@ -478,7 +478,7 @@ g3::forward_list<T,Allocator>::iterator g3::forward_list<T,Allocator>::erase_aft
 }
 
 template<typename T, typename Allocator>
-g3::forward_list<T,Allocator>::iterator g3::forward_list<T,Allocator>::erase_after(const_iterator first , const_iterator last)
+typename g3::forward_list<T,Allocator>::iterator g3::forward_list<T,Allocator>::erase_after(const_iterator first , const_iterator last)
 {
     Node* current = first.ptr;
     Node* end = last.ptr;
@@ -500,23 +500,23 @@ g3::forward_list<T,Allocator>::const_iterator::const_iterator(Node* node)
 {}
 
 template<typename T, typename Allocator>
-g3::forward_list<T,Allocator>::const_reference g3::forward_list<T,Allocator>::const_iterator::operator*() const {
+typename g3::forward_list<T,Allocator>::const_reference g3::forward_list<T,Allocator>::const_iterator::operator*() const {
     return ptr->val;
 }
 
 template<typename T, typename Allocator>
-g3::forward_list<T,Allocator>::const_pointer g3::forward_list<T,Allocator>::const_iterator::operator->() const {
+typename g3::forward_list<T,Allocator>::const_pointer g3::forward_list<T,Allocator>::const_iterator::operator->() const {
     return &(ptr->val);
 }
 
 template<typename T, typename Allocator>
-g3::forward_list<T,Allocator>::const_iterator& g3::forward_list<T,Allocator>::const_iterator::operator++() {
+typename g3::forward_list<T,Allocator>::const_iterator& g3::forward_list<T,Allocator>::const_iterator::operator++() {
     ptr = ptr->next;
     return *this;
 }
 
 template<typename T, typename Allocator>
-g3::forward_list<T,Allocator>::const_iterator g3::forward_list<T,Allocator>::const_iterator::operator++(int) {
+typename g3::forward_list<T,Allocator>::const_iterator g3::forward_list<T,Allocator>::const_iterator::operator++(int) {
     const_iterator temp = *this;
     ptr = ptr->next;
     return temp;
@@ -539,23 +539,23 @@ g3::forward_list<T,Allocator>::iterator::iterator(Node* node)
 {}
 
 template<typename T, typename Allocator>
-g3::forward_list<T,Allocator>::reference g3::forward_list<T,Allocator>::iterator::operator*() const {
+typename g3::forward_list<T,Allocator>::reference g3::forward_list<T,Allocator>::iterator::operator*() const {
     return this->ptr->val;
 }
 
 template<typename T, typename Allocator>
-g3::forward_list<T,Allocator>::pointer g3::forward_list<T,Allocator>::iterator::operator->() const {
+typename g3::forward_list<T,Allocator>::pointer g3::forward_list<T,Allocator>::iterator::operator->() const {
     return &(this->ptr->val);
 }
 
 template<typename T, typename Allocator>
-g3::forward_list<T,Allocator>::iterator& g3::forward_list<T,Allocator>::iterator::operator++()  {
+typename g3::forward_list<T,Allocator>::iterator& g3::forward_list<T,Allocator>::iterator::operator++()  {
     this->ptr = this->ptr->next;
     return *this;
 }
 
 template<typename T, typename Allocator>
-g3::forward_list<T,Allocator>::iterator g3::forward_list<T,Allocator>::iterator::operator++(int)  {
+typename g3::forward_list<T,Allocator>::iterator g3::forward_list<T,Allocator>::iterator::operator++(int)  {
     iterator temp = *this;
     this->ptr = this->ptr->next;
     return temp;

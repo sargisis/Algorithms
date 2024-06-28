@@ -2,16 +2,20 @@
 #include <chrono>
 #include <vector>
 #include <utility>
+#include <time.h>
+#include <cstdlib>
 
 using std::vector;
 
 int partition(vector<int>& arr, int low, int high);
+int partition_r(vector<int>& arr, int low, int high);
+void sortFirstMiddleLast(vector<int>& arr, int first , int mid , int last);
 
 void quick_sort_algorithm(vector<int>& arr, int low , int high) 
 {
     if (low < high)
     {
-        int mid = partition(arr , low , high);
+        int mid = partition_r(arr , low , high);
         quick_sort_algorithm(arr, low , mid - 1);
         quick_sort_algorithm(arr, mid + 1 , high);
     }
@@ -34,6 +38,34 @@ int partition(vector<int>& arr, int low , int high)
     return i + 1;
 }
 
+
+int partition_r(vector<int>& arr, int low , int high)
+{
+    srand(0);
+    int random = low + rand() % (high - low);
+
+    sortFirstMiddleLast(arr, random ,low , high);
+    std::swap(arr[random] , arr[high]);
+
+    return partition(arr, low , high);
+}
+
+void sortFirstMiddleLast(vector<int>& arr, int first , int mid , int last)
+{
+    if (arr[first] > arr[mid])
+    {
+        std::swap(arr[first] , arr[mid]);
+    }
+    if (arr[mid] > arr[last])
+    {
+        std::swap(arr[mid] , arr[last]);
+    }
+    if (arr[first] > arr[mid])
+    {
+        std::swap(arr[first] , arr[mid]);
+    }
+}
+
 void print(vector<int>& arr)
 {
     for (size_t i = 0; i < arr.size(); ++i)
@@ -45,7 +77,7 @@ void print(vector<int>& arr)
 
 int main() 
 {
-    vector<int> arr = {2,8,7,1,3,5,6,4};
+    vector<int> arr = {2,8,7,13333333,5,6,4, 0, 1, 5, 1};
 
     
     auto start = std::chrono::high_resolution_clock::now();
