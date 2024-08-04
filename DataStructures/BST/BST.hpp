@@ -10,11 +10,16 @@ namespace BST
     {
     }
 
-
     template <typename T>
     Binary_Search_Tree<T>::Binary_Search_Tree(const_reference data)
-        : root(new Node(data))
+        : root{new Node(data)}
     {
+    }
+
+    template<typename T>
+    Binary_Search_Tree<T>::~Binary_Search_Tree() noexcept
+    {
+        clear_recursive(this->root);
     }
 
     template <typename T>
@@ -65,6 +70,12 @@ namespace BST
         return node->m_data;
     }
 
+    template<typename T>
+    bool Binary_Search_Tree<T>::is_empty() const 
+    {
+        return this->root == 0;
+    }
+
     template <typename T>
     Binary_Search_Tree<T>::reference Binary_Search_Tree<T>::findMax()
     {
@@ -82,34 +93,37 @@ namespace BST
     }
 
     template <typename T>
-    Binary_Search_Tree<T>::const_Node_pointer Binary_Search_Tree<T>::find(const_reference data) const
+    Binary_Search_Tree<T>::size_type Binary_Search_Tree<T>::find(const_reference data) const
     {
         return findHelper(this->root, data);
     }
 
     template <typename T>
-    Binary_Search_Tree<T>::Node_Pointer Binary_Search_Tree<T>::find(const_reference data)
+    Binary_Search_Tree<T>::size_type Binary_Search_Tree<T>::find(reference data)
     {
         return findHelper(this->root, data);
     }
 
     template <typename T>
     Binary_Search_Tree<T>::const_reference Binary_Search_Tree<T>::findHelper(Node_Pointer node, const_reference data) const
-    {
-        if (node == nullptr || node->m_data == data)
+    {   
+        if (!node)
         {
-            return -1;
+            throw std::runtime_error("Error:");
         }
+        if (node->m_data == data)
+        {
+            return node->m_data;
+        }
+
         if (node->m_data > data)
         {
             return findHelper(node->m_left, data);
         }
-        else if (node->m_data < data)
+        else 
         {
             return findHelper(node->m_right, data);
-        }
-            return node->m_data;
-        
+        }        
     }
 
     template <typename T>
@@ -123,6 +137,43 @@ namespace BST
         {
             insertHelper(this->root, data);
         }
+    }
+
+    template<typename T>
+    Binary_Search_Tree<T>::Node_Pointer Binary_Search_Tree<T>::clear_recursive(Node_Pointer node) 
+    {
+        if (node != nullptr)
+        {
+            clear_recursive(node->m_left);
+            clear_recursive(node->m_right);
+            delete node; 
+        }
+        return nullptr;
+    }
+
+    template<typename T>
+    Binary_Search_Tree<T>::Node_Pointer Binary_Search_Tree<T>::clear_iterative(Node_Pointer node)
+    {
+        if (node != nullptr)
+        {
+            return node; 
+        }
+        std::stack<Node_Pointer> st;
+        while (!st.empty())
+        {
+            Node_Pointer tmp = st.top();
+            st.pop();
+            if (tmp->m_left != nullptr)
+            {
+                st.push(tmp->m_left);
+            }
+            if (tmp->m_right != nullptr)
+            {
+                st.push(tmp->m_right);
+            }
+            delete node;
+        }
+        node = nullptr;
     }
 
     template <typename T>
@@ -228,6 +279,34 @@ namespace BST
         }
     }
 
+    template<typename T>
+    void Binary_Search_Tree<T>::levelOrderHelper(Node_Pointer node) const 
+    {
+        if (node == nullptr)
+        {
+            return;
+        }
+        std::queue<Node_Pointer> queue;
+        queue.push(node);
+        while (!queue.empty())
+        {   
+
+            Node_Pointer tmp = queue.front();
+            queue.pop();
+            std::cout << tmp->m_data << " ";
+            if (tmp->m_left != nullptr) 
+            {
+                queue.push(tmp->m_left);
+            } 
+            if (tmp->m_right != nullptr)
+            {
+                queue.push(tmp->m_right);
+            }
+        }
+    }
+
+
+
     template <typename T>
     void Binary_Search_Tree<T>::preOrderTraversal() const
     {
@@ -244,6 +323,12 @@ namespace BST
     void Binary_Search_Tree<T>::postOrderTraversal() const
     {
         postOrderHelper(this->root);
+    }
+
+    template<typename T>
+    void Binary_Search_Tree<T>::levelOrderTraversal() const 
+    {
+        levelOrderHelper(this->root);
     }
 
     template <typename T>
@@ -338,5 +423,124 @@ namespace BST
             throw std::runtime_error("Value not found");
         }
         
+    }
+
+    template<typename T>
+    void Binary_Search_Tree<T>::inOrderIterative(Node_Pointer node) const 
+    {
+        if (node == nullptr)
+        {
+            return;
+        }
+        std::stack<Node_Pointer> st;
+        while (!st.empty())
+        {
+            if (node != nullptr)
+            {
+                st.push(node);
+                node = node->m_left;
+            }
+            else 
+            {
+                node = st.top();
+                st.pop();
+                std::cout << node->m_data << " ";
+                node = node->m_right;
+            }
+        }
+    }
+
+    template<typename T>
+    void Binary_Search_Tree<T>::preOrderIterative(Node_Pointer node) const 
+    {
+        if (node == nullptr)
+        {
+            return;
+        }
+        std::stack<Node_Pointer> st;
+        while (!st.empty())
+        {
+            if (node != nullptr)
+            {
+                st.push(node);
+                std::cout << node->m_data << " ";
+                node = node->m_left;
+            }
+            else 
+            {
+                node = st.top();
+                st.pop();
+                node = node->m_right;
+            }
+        }
+    }
+
+    template<typename T>
+    void Binary_Search_Tree<T>::postOrderIterative(Node_Pointer node) const
+    {
+        if (node == nullptr)
+        {
+            return;
+        }
+        
+        std::stack<Node_Pointer> st,st1;
+        st.push(node);
+        while (!st.empty())
+        {
+            Node_Pointer tmp = st.top();
+            st.pop();
+            st1.push(node);
+
+            if (tmp->m_left != nullptr)
+            {
+                st.push(tmp->m_left);
+            }
+            
+            if (tmp->m_right != nullptr)
+            {
+                st.push(tmp->m_right);
+            }
+        }
+        while (!st1.empty())
+        {
+            std::cout << st1.top() << " ";
+            st1.pop();
+        }
+    }
+
+    template<typename T>
+    void Binary_Search_Tree<T>::levelOrderIterative(Node_Pointer node) const 
+    {
+        if (node == nullptr)
+        {
+            return;
+        }
+        std::queue<Node_Pointer> queue;
+        queue.push(node);
+        while (!queue.empty())
+        {   
+
+            Node_Pointer tmp = queue.front();
+            queue.pop();
+            std::cout << tmp->m_data << " ";
+            if (tmp->m_left != nullptr) 
+            {
+                queue.push(tmp->m_left);
+            } 
+            if (tmp->m_right != nullptr)
+            {
+                queue.push(tmp->m_right);
+            }
+        }
+    }
+
+    template<typename T>
+    bool Binary_Search_Tree<T>::contains(const_reference val) const 
+    {
+        if (find(val))
+        {
+            return true;
+        }
+        return false; 
     }
 }

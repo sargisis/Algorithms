@@ -2,17 +2,17 @@
 
 #include <iostream>
 #include <stdexcept>
+#include <queue>
+#include <stack>
 
 namespace BST
 {
-
-
     template <typename T>
     class Binary_Search_Tree
     {
 
         struct Node;
-        // Member types
+
     public:
         using Node_Pointer = Node *;
         using value_type = T;
@@ -37,29 +37,40 @@ namespace BST
         Binary_Search_Tree();
         Binary_Search_Tree(const_reference data);
 
+        ~Binary_Search_Tree() noexcept;
+
         const_reference findMin() const;
         reference findMin();
         const_reference findMax() const;
         reference findMax();
 
-        const_Node_pointer find(const_reference data) const;
-        Node_Pointer find(const_reference data);
+        size_type find(const_reference data) const;
+        size_type find(reference data);
         void insert(const_reference data);
         void remove(const_reference data);
 
+        bool is_empty() const; 
+ 
         // traversals
         void preOrderTraversal() const;
         void inOrderTraversal() const;
         void postOrderTraversal() const;
+        void levelOrderTraversal() const; 
 
         // Getters for successor and predecessor
         int getSuccessor(const_reference val) const;
         int getPredecessor(const_reference val) const;
 
+        bool contains(const_reference val) const;
+
     private: // helper functions
         const_reference findHelper(Node_Pointer node, const_reference data) const;
         Node_Pointer insertHelper(Node_Pointer node, const_reference data);
         Node_Pointer removeHelper(Node_Pointer node, const_reference data);
+
+
+        Node_Pointer clear_recursive(Node_Pointer node);
+        Node_Pointer clear_iterative(Node_Pointer node);
 
         const_reference findMinHelper(const_Node_pointer node) const;
         reference findMinHelper(Node_Pointer node);
@@ -69,6 +80,13 @@ namespace BST
         void preOrderHelper(Node_Pointer node) const;
         void inOrderHelper(Node_Pointer node) const;
         void postOrderHelper(Node_Pointer node) const;
+        void levelOrderHelper(Node_Pointer node) const; 
+
+
+        void preOrderIterative(Node_Pointer node) const; 
+        void inOrderIterative(Node_Pointer node) const; 
+        void postOrderIterative(Node_Pointer node) const; 
+        void levelOrderIterative(Node_Pointer node) const; 
 
     private:
         Node_Pointer root;

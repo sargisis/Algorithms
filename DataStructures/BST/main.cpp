@@ -30,8 +30,8 @@ int main()
     // }
 
 
-    std::cout << tree.find(33);
-    tree.inOrderTraversal();
+        std::cout << tree.contains(2);
+    
 
     return 0;
 }
