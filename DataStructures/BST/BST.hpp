@@ -543,4 +543,24 @@ namespace BST
         }
         return false; 
     }
+
+    template<typename T>
+    Binary_Search_Tree<T>::size_type Binary_Search_Tree<T>::getHeight() const 
+    {
+        return getHeightHelper(this->root);
+    }   
+
+    template<typename T>
+    Binary_Search_Tree<T>::size_type Binary_Search_Tree<T>::getHeightHelper(Node_Pointer node) const 
+    {
+        if (node == nullptr)
+        {
+            return 0; 
+        }
+
+        auto leftHeight = getHeightHelper(node->m_left);
+        auto rightHeight = getHeightHelper(node->m_right);
+
+        return 1 + std::max(leftHeight , rightHeight);
+    }
 }

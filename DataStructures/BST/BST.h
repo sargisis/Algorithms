@@ -44,6 +44,8 @@ namespace BST
         const_reference findMax() const;
         reference findMax();
 
+        size_type getHeight() const; 
+
         size_type find(const_reference data) const;
         size_type find(reference data);
         void insert(const_reference data);
@@ -87,6 +89,8 @@ namespace BST
         void inOrderIterative(Node_Pointer node) const; 
         void postOrderIterative(Node_Pointer node) const; 
         void levelOrderIterative(Node_Pointer node) const; 
+
+        size_type getHeightHelper(Node_Pointer node) const; 
 
     private:
         Node_Pointer root;

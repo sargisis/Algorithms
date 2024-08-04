@@ -30,7 +30,7 @@ int main()
     // }
 
 
-        std::cout << tree.contains(2);
+    std::cout << tree.getHeight();
     
 
     return 0;
