@@ -1,6 +1,7 @@
 #pragma once
 
 #include "BST.h"
+#include <cstddef>
 
 namespace BST
 {
@@ -375,7 +376,7 @@ namespace BST
     int Binary_Search_Tree<T>::getSuccessor(const_reference val) const
     {
         Node_Pointer suc = nullptr;
-
+        
         Node_Pointer temp1 = this->root;
         while (temp1)
         {
