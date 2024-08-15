@@ -184,7 +184,13 @@ namespace AVL {
     }
 
     template<typename T>
-    typename AVL_Tree<T>::Node_Pointer AVL_Tree<T>::leftRotate(Node_Pointer node) 
+    typename AVL_Tree<T>::Node_Pointer AVL_Tree<T>::leftRotate() 
+    {
+       return leftRotateHelper(root);
+    }
+
+    template<typename T>
+    typename AVL_Tree<T>::Node_Pointer AVL_Tree<T>::leftRotateHelper(Node_Pointer node)
     {
         Node_Pointer y = node->right; 
         Node_Pointer T2 = y->left; 
@@ -199,7 +205,13 @@ namespace AVL {
     }
 
     template<typename T>
-    typename AVL_Tree<T>::Node_Pointer AVL_Tree<T>::rightRotate(Node_Pointer node) 
+    typename AVL_Tree<T>::Node_Pointer AVL_Tree<T>::rightRotate() 
+    {
+        return rightRotateHelper(root);
+    }
+
+    template<typename T>
+    typename AVL_Tree<T>::Node_Pointer AVL_Tree<T>::rightRotateHelper(Node_Pointer node)
     {
         Node_Pointer y = node->left; 
         Node_Pointer T2 = y->right; 
@@ -231,19 +243,19 @@ namespace AVL {
         int BF = getBalanceFactor(node);
 
         if (BF > 1 && data < node->left->val)
-            return rightRotate(node);
+            return rightRotateHelper(node);
 
         if (BF < -1 && data > node->right->val)
-            return leftRotate(node);
+            return leftRotateHelper(node);
 
         if (BF > 1 && data > node->left->val) {
-            node->left = leftRotate(node->left);
-            return rightRotate(node);
+            node->left = leftRotateHelper(node->left);
+            return rightRotateHelper(node);
         }
 
         if (BF < -1 && data < node->right->val) {
-            node->right = rightRotate(node->right);
-            return leftRotate(node);
+            node->right = rightRotateHelper(node->right);
+            return leftRotateHelper(node);
         }
 
         return node; 
@@ -291,19 +303,19 @@ namespace AVL {
         int BF = getBalanceFactor(node);
 
         if (BF > 1 && getBalanceFactor(node->left) >= 0)
-            return rightRotate(node);
+            return rightRotateHelper(node);
 
         if (BF > 1 && getBalanceFactor(node->left) < 0) {
-            node->left = leftRotate(node->left);
-            return rightRotate(node);
+            node->left = leftRotateHelper(node->left);
+            return rightRotateHelper(node);
         }
 
         if (BF < -1 && getBalanceFactor(node->right) <= 0)
-            return leftRotate(node);
+            return leftRotateHelper(node);
 
         if (BF < -1 && getBalanceFactor(node->right) > 0) {
-            node->right = rightRotate(node->right);
-            return leftRotate(node);
+            node->right = rightRotateHelper(node->right);
+            return leftRotateHelper(node);
         }
 
         return node; 

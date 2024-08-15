@@ -74,5 +74,8 @@ int main() {
     tree.inOrderTraversal();
     std::cout << std::endl;
 
+    tree.rightRotate();
+    tree.inOrderTraversal();
+
     return 0;
 }

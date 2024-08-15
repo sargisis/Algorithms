@@ -63,8 +63,8 @@ public:
        void postOrderTraversal() const;
        void levelOrderTraversal() const; 
 
-       Node_Pointer leftRotate(Node_Pointer node); 
-       Node_Pointer rightRotate(Node_Pointer node);
+       Node_Pointer leftRotate(); 
+       Node_Pointer rightRotate();
 
         // Getters for successor and predecessor
         int getSuccessor(const_reference val) const;
@@ -85,8 +85,11 @@ public:
       void postOrderHelper(Node_Pointer node) const;
       void levelOrderHelper(Node_Pointer node) const; 
 
+      Node_Pointer leftRotateHelper(Node_Pointer node);
+      Node_Pointer rightRotateHelper(Node_Pointer node);
+
     
-public:
+private:
     Node_Pointer root; 
 
 };
