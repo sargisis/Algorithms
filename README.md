@@ -1,9 +1,10 @@
 <h1 align="center">
   <img 
-    src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=28&duration=2500&pause=800&color=00F0FF&center=true&vCenter=true&width=600&lines=Algorithms+%26+Data+Structures;Improving+logic+day+by+day;Practice+%7C+Think+%7C+Solve+%7C+Repeat" 
-    alt="Typing SVG" style="pointer-events:none; user-select:none;" 
+    src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=28&duration=2500&pause=800&color=00F0FF&center=true&vCenter=true&width=600&lines=Algorithms+%26+Data+Structures;Improving+logic+day+by+day;Practice+%7C+Think+%7C+Solve+%7C+Repeat&noLink=true" 
+    alt="Typing animation"
   />
 </h1>
+
 
 <p align="center">
   A collection of algorithm implementations, data structures, and coding problem solutions.
