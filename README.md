@@ -1,6 +1,11 @@
 <h1 align="center">
-  📚 Algorithms & Data Structures
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=28&duration=2500&pause=800&color=00F0FF&center=true&vCenter=true&width=600&lines=Algorithms+%26+Data+Structures;Improving+logic+day+by+day;Practice+%7C+Think+%7C+Solve+%7C+Repeat" />
 </h1>
+
+<!-- Wave -->
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:00F0FF,100:8A2BE2&height=110&section=header" />
+</p>
 
 <p align="center">
   A collection of algorithm implementations, data structures, and coding problem solutions.
@@ -43,7 +48,7 @@ The purpose of this repo is to:
 
 ---
 
-### 🔥 Status
+### 🏁 Status
 
 This project evolves over time — algorithms may be updated, rewritten, or replaced with improved variations.
 
@@ -54,3 +59,8 @@ This project evolves over time — algorithms may be updated, rewritten, or repl
 **Sargis Abgaryan**  
 System & Backend Developer  
 Rust | C++ | C | JavaScript
+
+
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:8A2BE2,100:00F0FF&height=110&section=footer" />
+</p>
