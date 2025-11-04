@@ -2,11 +2,6 @@
   <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=28&duration=2500&pause=800&color=00F0FF&center=true&vCenter=true&width=600&lines=Algorithms+%26+Data+Structures;Improving+logic+day+by+day;Practice+%7C+Think+%7C+Solve+%7C+Repeat" />
 </h1>
 
-
-<p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:00F0FF,100:8A2BE2&height=110&section=header" />
-</p>
-
 <p align="center">
   A collection of algorithm implementations, data structures, and coding problem solutions.
 </p>
